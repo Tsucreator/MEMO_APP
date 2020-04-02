@@ -13,12 +13,32 @@
       </form>
     </div>
   <div class="top_box">
-    {% for memo in memos %}
+    {% for memo in page %}
     <div>
       <p>{{ memo.content }}</p>
       <p>{{ memo.update_datetime|date:"Y/m/d H:m:s" }}</p>
     </div>
     {% endfor %}
   </div>
+
+  <div class="pagination">
+    <!--前への文字を入れる-->
+    {% if page.has_previous %}
+    <a href="{% url 'index' %}{{ page.previous_page_number }}">前へ</a>
+    {% endif %}
+     <!--1~5を入れる-->
+    {% for num in page.paginator.page_range %}
+        {% if page.number == num %}
+            <span class="current">{{ page.number }}</span>
+        {% else %}
+            <a href="{% url 'index' %}{{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+    <!--次への文字を入れる-->
+    {% if page.has_next %}
+    <a href="{% url 'index' %}{{ page.next_page_number }}">次へ</a>
+    {% endif %}
+  </div>
+
 </body>
 </html>

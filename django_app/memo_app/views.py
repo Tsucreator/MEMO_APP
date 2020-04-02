@@ -2,12 +2,14 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
 from .forms import PostForm
 from .models import *
+from django.core.paginator import Paginator
 
-def index(request):
+def index(request, now_page=1):
     memos = Memo.objects.all()
+    page = Paginator(memos, 15)
     params = {
-      'memos' : memos,
-      'form': PostForm()
+        'page': page.get_page(now_page),
+        'form': PostForm()
       }
     return render(request, 'index.html', params)
 
