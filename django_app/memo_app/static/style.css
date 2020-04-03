@@ -1,0 +1,16 @@
+/*こっから下に記載してい*/
+
+/*全体の中央揃えと枠作り*/
+body{
+    text-align:center;
+    border:2px solid #000;
+    margin:20px 400px;
+}
+
+/*h1に関しては以下の通り*/
+h1 {
+    font-family:serif;
+}
+
+/*メモを書く場所のlayout*/
+
