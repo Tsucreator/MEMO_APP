@@ -11,7 +11,7 @@
           {{ form.content }}
         </div>
         <div class="post-form">
-            <input type="submit" value="登録" class="post-botton">
+            <input id='submit-button' type="submit" value="登録" class="post-botton">
         </div>
       </form>
     </div>
@@ -34,11 +34,11 @@
     
 
   <div class="top_box">
-    <h3>メモ内容</h3>
+    <h2>メモ内容一覧</h2>
     {% for memo in page %}
     <div class="memo_contents">
-      <p>{{ memo.update_datetime|date:"Y/m/d H:m:s" }}</p>
-      <p>{{ memo.content }}</p>
+      <p class="time">{{ memo.update_datetime|date:"Y/m/d H:m:s" }}</p>
+      <p class="contents">{{ memo.content }}</p>
     </div>
     {% endfor %}
   </div>
