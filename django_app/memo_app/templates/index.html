@@ -12,6 +12,16 @@
         </div>
       </form>
     </div>
+
+
+    <form action="{% url 'set_record_number' %}" method="post">
+        {% csrf_token %}
+        <div class="slct01">
+            {{ record_number_form.record_number }}
+        </div>
+    </form>
+
+
   <div class="top_box">
     {% for memo in page %}
     <div>
@@ -20,6 +30,7 @@
     </div>
     {% endfor %}
   </div>
+
 
   <div class="pagination">
     <!--前への文字を入れる-->

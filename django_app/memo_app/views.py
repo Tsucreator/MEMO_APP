@@ -1,16 +1,28 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
-from .forms import PostForm
+from .forms import PostForm,  RecordNumberForm
 from .models import *
 from django.core.paginator import Paginator
 
 def index(request, now_page=1):
-    memos = Memo.objects.all()
-    page = Paginator(memos, 15)
+
+    #レコードの件数
+    if 'record_number' in request.session:
+        record_number = request.session['record_number']
+    else: 
+        record_number = 10
+    
+    record_number_form = RecordNumberForm()
+    record_number_form.initial = {'record_number': str(record_number)}
+
+    #変数と格納
+    memos = Memo.objects.all().order_by('update_datetime').reverse()
+    page = Paginator(memos, record_number)
     params = {
         'page': page.get_page(now_page),
-        'form': PostForm()
-      }
+        'form': PostForm(),
+        'record_number_form': record_number_form,
+}
     return render(request, 'index.html', params)
 
 def post(request):
@@ -21,5 +33,12 @@ def post(request):
         print(form.errors)
 
     return redirect(to='/')
+
+#セッションに格納
+
+def set_record_number(request):
+    request.session['record_number'] = request.POST['record_number']
+    return redirect(to='/')
+
 
 #Create your views here.
