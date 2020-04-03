@@ -20,3 +20,14 @@ class RecordNumberForm(forms.Form):
         widget=forms.Select(attrs={'onchange': 'submit(this.form)'}), 
         choices=CHOICE_FIELD_RECODE_NUMBERS
     )
+
+CHOICE_FIELD_SORT = (
+    ('new', '新着順'),
+    ('old', '古い順'),
+)
+
+class SortForm(forms.Form):
+    order_option = forms.ChoiceField(
+        widget=forms.Select(attrs={'onchange': 'submit(this.form)'}), 
+        choices= CHOICE_FIELD_SORT
+    )

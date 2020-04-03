@@ -21,6 +21,12 @@
         </div>
     </form>
 
+    <form action="{% url 'set_order_option' %}" method="post">
+        {% csrf_token %}
+        <div class="slct02">
+            {{ order_option_form.order_option }}
+        </div>
+    </form>
 
   <div class="top_box">
     {% for memo in page %}
